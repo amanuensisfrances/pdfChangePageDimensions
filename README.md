@@ -11,7 +11,7 @@ A command-line `Node.js` tool for Windows to change a PDF document's page dimens
 - [`PDFtk Server`](https://www.pdflabs.com/tools/pdftk-server/)
 - [`ExifTool`](https://exiftool.org/install.html/)
 - [`Adobe Acrobat Reader DC`](https://get.adobe.com/reader/) or [`Adobe Acrobat Pro DC`](https://www.adobe.com/acrobat.html/)
-- A Virtual PDF Printer to virtually print and embed fonts before resizing (I personally use [`Bullzip PDF Printer`](https://www.bullzip.com/products/pdf/download.php/))
+- A Virtual PDF Printer to virtually (re)print the input PDF document and embed the fonts before resizing (I personally use [`Bullzip PDF Printer`](https://www.bullzip.com/products/pdf/download.php/))
 
 ## Installation and Prerequisites
 1. Install `Node.js`, `pdfinfo`, `Ghostscript`, `PDFtk Server`, and `ExifTool` then [add their directories to the `PATH` environment variable](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)/).
