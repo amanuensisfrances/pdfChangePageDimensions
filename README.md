@@ -20,7 +20,7 @@ A command-line `Node.js` tool for Windows to change a PDF document's page dimens
 4. Install either `Adobe Acrobat Reader DC` or `Adobe Acrobat Pro DC` then open any `*.pdf` document in `Acrobat` and go to the 'Print' window (`CTRL+P`).
 5. Select your preferred Virtual PDF Printer then click 'Fit' under the 'Page sizing & Handling' section and make sure 'Choose paper source by PDF page size' is unticked.
 6. Customize the rest of your 'Properties', 'Advanced', 'Page Setup...' settings per your needs (though I believe this `pdfChangePageDimensions.js` tool only works for PDF documents with a portrait orientation by default, but it shouldn't be too difficult to modify the source code to work for PDF documents with a landscape orientation).
-7. Try virtually printing a `*.pdf` file to save your preferred settings and then check the 'Fonts' section of the result's document properties (`CTRL+D`) to check if the fonts are all embedded properly. 
+7. Try virtually printing a `*.pdf` file to save your preferred settings and then check the 'Fonts' section of the result's document properties (`CTRL+D`) to make sure the fonts are all embedded properly. 
 
 ## How It Works
 
