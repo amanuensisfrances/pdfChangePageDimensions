@@ -18,10 +18,10 @@ A command-line `Node.js` tool for Windows to change a PDF document's page dimens
 2. Open your `Ghostscript`'s `bin` folder then copy `gswin64c.exe` and rename the copy as `gs.exe`.
 3. Install your preferred Virtual PDF Printer and then [set it as your default printer in Windows](https://support.microsoft.com/en-us/windows/set-a-default-printer-in-windows-e10cf8b8-e596-b102-bf84-c41022b5036f/).
 5. Change your Virtual PDF Printer settings such that:
-- [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name](Images/Bullzip PDF Printer Settings/General.png "Bullzip PDF Printer Settings - General")
-- [No dialog/popup appears during document creation](Images/Bullzip PDF Printer Settings/Dialogs.png "Bullzip PDF Printer Settings - Dialogs")
-- [PDF Quality is default](Images/Bullzip PDF Printer Settings/Document.png "Bullzip PDF Printer Settings - Document")
-- [Neither the output directory/destination folder nor the output file will be opened after document creation](Images/Bullzip PDF Printer Settings/Actions.png "Bullzip PDF Printer Settings - Action")
+- [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/General.png)
+- [No dialog/popup appears during document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/Dialogs.png)
+- [PDF Quality is set to default.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/Document.png)
+- [Neither the output directory/destination folder nor the output file will be opened after document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/Actions.png)
 6. Open any `*.pdf` document in `Acrobat Reader` or `Acrobat Pro`, go to the 'Print' window (`CTRL+P`) and select your preferred Virtual PDF Printer then click 'Fit' under the 'Page sizing & Handling' section and make sure 'Choose paper source by PDF page size' is unticked.
 8. Customize the rest of your 'Properties', 'Advanced', 'Page Setup...' settings as per your needs (though I believe this `pdfChangePageDimensions.js` tool only works for PDF documents with a portrait orientation by default, but it shouldn't be too difficult to modify the source code to work for PDF documents with a landscape orientation).
 9. Try virtually printing a `*.pdf` file to save your preferred settings and then check the 'Fonts' section of the result's document properties (`CTRL+D`) to make sure the fonts are all embedded properly. 
