@@ -22,11 +22,11 @@ A `Node.js` Windows command-line tool used for changing a PDF document's page di
 
 4. Change your Virtual PDF Printer settings such that:
 - [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/General.png)
-- [No dialog/popup appears during document creation.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Dialogs.png)
-- [PDF Quality is set to default.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Document.png)
-- [Neither the output directory/destination folder nor the output file will be opened after document creation.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Actions.png)
+- [No dialog/popup appears during document creation.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/Dialogs.png)
+- [PDF Quality is set to default.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/Document.png)
+- [Neither the output directory/destination folder nor the output file will be opened after document creation.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/Actions.png)
 
-5. [Open any `*.pdf` document in `Acrobat Reader` or `Acrobat Pro`, go to the 'Print' window (`CTRL+P`) and select your preferred Virtual PDF Printer then click 'Fit' under the 'Page sizing & Handling' section and make sure 'Choose paper source by PDF page size' is unticked. Also make sure the output document will be vertically centered](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Adobe%20Acrobat%20Print%20Window.png).
+5. [Open any `*.pdf` document in `Acrobat Reader` or `Acrobat Pro`, go to the 'Print' window (`CTRL+P`) and select your preferred Virtual PDF Printer then click 'Fit' under the 'Page sizing & Handling' section and make sure 'Choose paper source by PDF page size' is unticked. Also make sure the output document will be vertically centered](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/Adobe%20Acrobat%20Print%20Window.png).
 
 6. Customize the rest of your 'Properties', 'Advanced', 'Page Setup...' settings as per your needs (I believe this `pdfChangePageDimensions.js` tool only works for PDF documents with a portrait orientation by default, but it shouldn't be too difficult to modify the source code to work for PDF documents with a landscape orientation).
 
