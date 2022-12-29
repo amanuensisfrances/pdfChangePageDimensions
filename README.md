@@ -53,8 +53,15 @@ Finally, the tool calculates the coordinates which will be used in a `Ghostscrip
 
 ## Example
 ### CASE 1 (`step2Width / step2Height < step4Width / step4Height`)
+My Virtual PDF Printer's default paper size is `A4` so `step2Width ≈ 595 pt` and `step2Height ≈ 842 pt`. Let's somewhat arbitrarily pick `desiredWidth = step4Width = 1600 pt` and `desiredHeight = step4Height = 2000 pt`. This is considered **Case 1** because `step2Width / step2Height = √2/2 ≈ 0.707 < 0.8 = step4Width / stepHeight`.
 
 ### CASE 2 (`step2Width / step2Height ≥ step4Width / step4Height`)
+
+#### • CASE 2A (`step2Width / step2Height = step4Width / step4Height`)
+My Virtual PDF Printer's default paper size is `A4` so `step2Width = 595 pt` and `step2Height = 842 pt`. Let's pick `4A0` (or any of the [ISO 216 International Paper Sizes](https://en.wikipedia.org/wiki/Paper_size#International_paper_sizes) as they all share an aspect ratio of `<height>/<width> = √2` or `<width>/<height> = √2/2`) as the `desiredDimensions` with `desiredWidth = step4Width = 1200 pt` and `desiredHeight = step4Height = 1600 pt` . This is considered **Case 2A** because `step2Width / step2Height = √2/2 = step4Width / stepHeight`.
+
+#### • CASE 2B (`step2Width / step2Height > step4Width / step4Height`)
+My Virtual PDF Printer's default paper size is `A4` so `step2Width = 595 pt` and `step2Height = 842 pt`. Let's somewhat arbitrarily pick `desiredWidth = step4Width = 500 pt` and `desiredHeight = step4Height = 1000 pt`. This is considered **Case 2B** because `step2Width / step2Height = √2/2 ≈ 0.707 > 0.5 = step4Width / stepHeight`.
 
 ## Some Side Notes
 I am aware that I can shorten the tool's source code by essentially merging steps 3 and 4 into a single step but I personally still prefer the tool having 4 steps because it is easier for me to visualize each step and makes certain calculations more readable. For example, I declared `step3Height` and assigned `(desiredWidth / step2Width) * step2Height` to it to make the calculation of `yCoordinate2` (in the case where `step2Width / step2Height < step4Width / step4Height`) more legible with `yCoordinate2 = (step3Height - (step3Height - ((step4Width / step1Width) * step1Height)) / 2)` as opposed to the expanded `yCoordinate2 = ((desiredWidth / step2Width) * step2Height - ((desiredWidth / step2Width) * step2Height - ((step4Width / step1Width) * step1Height)) / 2)`.
