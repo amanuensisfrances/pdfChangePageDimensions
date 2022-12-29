@@ -5,20 +5,20 @@ A `Node.js` Windows command-line tool used for changing a PDF document's page di
 `node pdfChangePageDimensions.js <inputPDF> <desiredWidth>x<desiredHeight>`
 
 ## Requirements and Dependencies
-- [`Node.js`](https://nodejs.org/en/download/)
-- [`pdfinfo` from Xpdf command-line tools](https://www.xpdfreader.com/download.html/)
-- [`Ghostscript`](https://www.ghostscript.com/releases/gsdnld.html/)
-- [`PDFtk Server`](https://www.pdflabs.com/tools/pdftk-server/)
-- [`ExifTool`](https://exiftool.org/install.html/)
-- [`Adobe Acrobat Reader DC`](https://get.adobe.com/reader/) or [`Adobe Acrobat Pro DC`](https://www.adobe.com/acrobat.html/)
-- A Virtual PDF Printer to virtually (re)print the input PDF document and embed the fonts before resizing (I personally use [`Bullzip PDF Printer`](https://www.bullzip.com/products/pdf/download.php/))
+- [`Node.js`](https://nodejs.org/en/download)
+- [`pdfinfo` from Xpdf command-line tools](https://www.xpdfreader.com/download.html)
+- [`Ghostscript`](https://www.ghostscript.com/releases/gsdnld.html)
+- [`PDFtk Server`](https://www.pdflabs.com/tools/pdftk-server)
+- [`ExifTool`](https://exiftool.org/install.html)
+- [`Adobe Acrobat Reader DC`](https://get.adobe.com/reader) or [`Adobe Acrobat Pro DC`](https://www.adobe.com/acrobat.html)
+- A Virtual PDF Printer to virtually (re)print the input PDF document and embed the fonts before resizing (I personally use [`Bullzip PDF Printer`](https://www.bullzip.com/products/pdf/download.php))
 
 ## Installation and Setup
-1. Install `Node.js`, `pdfinfo`, `Ghostscript`, `PDFtk Server`, `ExifTool`, and either `Adobe Acrobat Reader DC` or `Adobe Acrobat Pro DC` then [add all their directories to the `PATH` environment variable](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)/).
+1. Install `Node.js`, `pdfinfo`, `Ghostscript`, `PDFtk Server`, `ExifTool`, and either `Adobe Acrobat Reader DC` or `Adobe Acrobat Pro DC` then [add all their directories to the `PATH` environment variable](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)).
 
 2. Open your `Ghostscript`'s `bin` folder then copy `gswin64c.exe` as `gs.exe`.
 
-3. Install your preferred Virtual PDF Printer and then [set it as your default printer in Windows](https://support.microsoft.com/en-us/windows/set-a-default-printer-in-windows-e10cf8b8-e596-b102-bf84-c41022b5036f/).
+3. Install your preferred Virtual PDF Printer and then [set it as your default printer in Windows](https://support.microsoft.com/en-us/windows/set-a-default-printer-in-windows-e10cf8b8-e596-b102-bf84-c41022b5036f).
 
 4. Change your Virtual PDF Printer settings such that:
 - [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/General.png)
@@ -32,17 +32,17 @@ A `Node.js` Windows command-line tool used for changing a PDF document's page di
 
 7. Try virtually printing a `*.pdf` file to save your preferred settings and then check the 'Fonts' section of the result's document properties (`CTRL+D`) to make sure the fonts are all embedded properly. 
 
-8. If you're using `Adobe Acrobat Pro`, download and extract `withAcrobatPro` from the [latest `pdfChangePageDimensions` release](https://github.com/amanuensisfrances/pdfChangePageDimensions/releases/) and if you're using `Adobe Acrobat Reader`, download and extract `withAcrobatReader` instead.
+8. If you're using `Adobe Acrobat Pro`, download and extract `withAcrobatPro` from the [latest `pdfChangePageDimensions` release](https://github.com/amanuensisfrances/pdfChangePageDimensions/releases) and if you're using `Adobe Acrobat Reader`, download and extract `withAcrobatReader` instead.
 
 9. Run `node pdfChangePageDimensions.js <inputPDF> <desiredWidth>x<desiredHeight>` in the command-line to check if everything works correctly. If it returns an error, try adjusting `waitingTimeForPrinter` in the source code of `pdfChangePageDimensions.js` and try again.
 
 ## How It Works
 
 ### STEP 1
-Using `Ghostscript`, the tool creates a copy of your `<inputPDF>` file as `step1.pdf` and sets the PDF document view options to open with bookmarks, start on page 1, fit the page to the window, and use a single page layout. If you don't want your document to display bookmarks, search the source code of `pdfChangePageDimensions.js` and replace `/UseOutlines` with `/UseNone`. You can read more about PDF view options [here](https://thechriskent.com/2017/03/06/setting-pdf-view-options-with-pdfmark/).
+Using `Ghostscript`, the tool creates a copy of your `<inputPDF>` file as `step1.pdf` and sets the PDF document view options to open with bookmarks, start on page 1, fit the page to the window, and use a single page layout. If you don't want your document to display bookmarks, search the source code of `pdfChangePageDimensions.js` and replace `/UseOutlines` with `/UseNone`. You can read more about PDF view options [here](https://thechriskent.com/2017/03/06/setting-pdf-view-options-with-pdfmark).
 
 ### STEP 2
-Then, the tool creates a copy of your `step1.pdf` file as `step2.pdf` to set the file name for the virtually printed PDF document with embedded fonts. Here the tool will execute the `printStep2.bat` batch script which will open the 'Print' window for `step2.pdf` in either `Acrobat.exe` or `AcroRd32.exe`, wait a few seconds for it to open, then send the keystroke `ENTER` using [`SendKeys`](https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/windows-scripting/8c6yea83(v=vs.84)/) to start the virtual PDF printing process. Simultaneously, the tool will wait for `waitingTimeForAcrobat` seconds as soon as the `printStep2.bat` batch script is run before closing `Acrobat.exe` or `AcroRd32.exe`, then wait another `waitingTimeForPrinter` seconds for the Virtual PDF Printer to finish virtually printing `step2.pdf` which will be saved in `C:Users\<username>\Downloads`. The tool then overwrites the `step2.pdf` in the current directory with `C:Users\<username>\Downloads\step2.pdf` and *optionally* deletes `C:Users\<username>\Downloads\step2.pdf`.
+Then, the tool creates a copy of your `step1.pdf` file as `step2.pdf` to set the file name for the virtually printed PDF document with embedded fonts. Here the tool will execute the `printStep2.bat` batch script which will open the 'Print' window for `step2.pdf` in either `Acrobat.exe` or `AcroRd32.exe`, wait a few seconds for it to open, then send the keystroke `ENTER` using [`SendKeys`](https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/windows-scripting/8c6yea83(v=vs.84)) to start the virtual PDF printing process. Simultaneously, the tool will wait for `waitingTimeForAcrobat` seconds as soon as the `printStep2.bat` batch script is run before closing `Acrobat.exe` or `AcroRd32.exe`, then wait another `waitingTimeForPrinter` seconds for the Virtual PDF Printer to finish virtually printing `step2.pdf` which will be saved in `C:Users\<username>\Downloads`. The tool then overwrites the `step2.pdf` in the current directory with `C:Users\<username>\Downloads\step2.pdf` and *optionally* deletes `C:Users\<username>\Downloads\step2.pdf`.
 
 ### STEP 3
 In this step, the tool will use `pdfinfo` to return the PDF metadata for `step1.pdf` and `step2.pdf` respectively, then searches the metadata string for the corresponding page dimensions (`step1Width`, `step1Height`, `step2Width`, and `step2Height`) by using the regular expression `/(?<=Page size:)(.*?)(?=pts)/g`.
