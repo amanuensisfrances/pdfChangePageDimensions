@@ -54,7 +54,7 @@ Finally, the tool calculates the coordinates which will be used in a `Ghostscrip
 ## Example
 ### CASE 1 (`step2Width / step2Height < step4Width / step4Height`)
 
-### CASE 2 (`step2Width / step2Height > step4Width / step4Height`)
+### CASE 2 (`step2Width / step2Height ≥ step4Width / step4Height`)
 
 ## Some Side Notes
 I am aware that I can shorten the tool's source code by essentially merging steps 3 and 4 into a single step but I personally still prefer the tool having 4 steps because it is easier for me to visualize each step and makes certain calculations more readable. For example, I declared `step3Height` and assigned `(desiredWidth / step2Width) * step2Height` to it to make the calculation of `yCoordinate2` (in the case where `step2Width / step2Height < step4Width / step4Height`) more legible with `yCoordinate2 = (step3Height - (step3Height - ((step4Width / step1Width) * step1Height)) / 2)` as opposed to the expanded `yCoordinate2 = ((desiredWidth / step2Width) * step2Height - ((desiredWidth / step2Width) * step2Height - ((step4Width / step1Width) * step1Height)) / 2)`.
