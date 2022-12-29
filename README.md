@@ -2,7 +2,7 @@
 A command-line `Node.js` tool for Windows to change a PDF document's page dimensions while preserving the top, left, and right margins proportions (i.e., only the bottom margin proportion may change after the resizing) then strip the output PDF document's metadata afterwards.
 
 ## How to Use
-`node pdfChangePageDimensions.js input.pdf <width>x<height>`
+`node pdfChangePageDimensions.js input.pdf <desiredWidth>x<desiredHeight>`
 
 ## Requirements and Dependencies
 - [`Node.js`](https://nodejs.org/en/download/)
@@ -29,13 +29,16 @@ A command-line `Node.js` tool for Windows to change a PDF document's page dimens
 ## How It Works
 
 ### STEP 1
-Using `Ghostscript`, the tool creates a copy of your `<inputPDF>` file as `step1.pdf` and sets the PDF document view options to open with bookmarks, start on page 1, fit the page to the window, and use a single page layout. You can read more about PDF view Options [here](https://thechriskent.com/2017/03/06/setting-pdf-view-options-with-pdfmark/).
+Using `Ghostscript`, the tool creates a copy of your `<inputPDF>` file as `step1.pdf` and sets the PDF document view options to open with bookmarks, start on page 1, fit the page to the window, and use a single page layout. You can read more about PDF view options [here](https://thechriskent.com/2017/03/06/setting-pdf-view-options-with-pdfmark/).
 
 ### STEP 2
-Then, the tool creates a copy of your `step1.pdf` file as `step2.pdf` to set the file name for the virtually printed PDF document with embedded fonts. Here the tool will execute the `printStep2.bat` batch script which will open the 'Print' window for `step2.pdf` in either `Acrobat.exe` or `AcroRd32.exe`, wait a few seconds for it to open, then send the keystroke `ENTER` using [`SendKeys`](https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/windows-scripting/8c6yea83(v=vs.84)/) to start the virtual PDF printing process. Simultaneously, the tool will wait for `waitingTimeForAcrobat` seconds as soon as the `printStep2.bat` batch script is run before closing `Acrobat.exe` or `AcroRd32.exe`, then wait another `waitingTimeForPrinter` seconds for the Virtual PDF Printer to finish virtually printing `step2.pdf` which will be saved in `C:Users\<username>\Downloads`. The tool then overwrites the `step2.pdf` in the current directory with the `C:Users\<username>\Downloads\step2.pdf` and *optionally* deletes `C:Users\<username>\Downloads\step2.pdf`.
+Then, the tool creates a copy of your `step1.pdf` file as `step2.pdf` to set the file name for the virtually printed PDF document with embedded fonts. Here the tool will execute the `printStep2.bat` batch script which will open the 'Print' window for `step2.pdf` in either `Acrobat.exe` or `AcroRd32.exe`, wait a few seconds for it to open, then send the keystroke `ENTER` using [`SendKeys`](https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/windows-scripting/8c6yea83(v=vs.84)/) to start the virtual PDF printing process. Simultaneously, the tool will wait for `waitingTimeForAcrobat` seconds as soon as the `printStep2.bat` batch script is run before closing `Acrobat.exe` or `AcroRd32.exe`, then wait another `waitingTimeForPrinter` seconds for the Virtual PDF Printer to finish virtually printing `step2.pdf` which will be saved in `C:Users\<username>\Downloads`. The tool then overwrites the `step2.pdf` in the current directory with `C:Users\<username>\Downloads\step2.pdf` and *optionally* deletes `C:Users\<username>\Downloads\step2.pdf`.
 
 ### STEP 3
+In this step, the tool will use `pdfinfo` to return the PDF metadata for `step1.pdf` and `step2.pdf` respectively, then searches the metadata string for the corresponding page dimensions (`step1Width`, `step1Height`, `step2Width`, and `step2Height`) by using the regular expression `/(?<=Page size:)(.*?)(?=pts)/g`.
+Afterwards, the tool calculates `step3Width` and `step3Height` in terms of the inserted `desiredWidth` and also creates variables `step4Width = desiredWidth` and `step4Height = desiredHeight`. At this point, the tool will run a `Ghostscript` command to create `step3.pdf` that essentially scales `step2.pdf` until it has the same width as `desiredWidth` but a different height from `desiredHeight`.
 
 ### STEP 4
+Finally, the tool calculates the coordinates which will be used in a `Ghostscript` command to create `step4.pdf` that essentially crops `step3.pdf` in such a way that will preserve top, left, and right margins proportions of the original `input.pdf`/`step1.pdf` document and such that the bottom margin proportion will be the only one that can vary if the desired aspect ratio `desiredWidth/desiredHeight` is not equal to the original `step1Width/step1Height`. *Optionally*, the tool will copy `step4.pdf` as `output.pdf` by using `PDFtk` to remove the document information dictionary metadata and use `ExifTool` to (reversibly) 'remove' the XMP metadata. You can read more about PDF metadata removal [here](https://gist.github.com/hubgit/6078384)
 
 ## Example
