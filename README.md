@@ -6,7 +6,7 @@ A `Node.js` Windows command-line tool used for changing a PDF document's page di
 
 ## Requirements and Dependencies
 - [`Node.js`](https://nodejs.org/en/download)
-- [`pdfinfo` from Xpdf command-line tools](https://www.xpdfreader.com/download.html)
+- [`pdfinfo` from `Xpdf` command-line tools](https://www.xpdfreader.com/download.html)
 - [`Ghostscript`](https://www.ghostscript.com/releases/gsdnld.html)
 - [`PDFtk Server`](https://www.pdflabs.com/tools/pdftk-server)
 - [`ExifTool`](https://exiftool.org/install.html)
