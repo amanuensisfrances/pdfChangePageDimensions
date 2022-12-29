@@ -21,7 +21,7 @@ A `Node.js` Windows command-line tool used for changing a PDF document's page di
 3. Install your preferred Virtual PDF Printer and then [set it as your default printer in Windows](https://support.microsoft.com/en-us/windows/set-a-default-printer-in-windows-e10cf8b8-e596-b102-bf84-c41022b5036f/).
 
 4. Change your Virtual PDF Printer settings such that:
-- [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/General.png/)
+- [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name.](https://raw.githubusercontent.com/amanuensisfrances/pdfChangePageDimensions/main/Images/General.png)
 - [No dialog/popup appears during document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Dialogs.png/)
 - [PDF Quality is set to default.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Document.png/)
 - [Neither the output directory/destination folder nor the output file will be opened after document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Actions.png/)
