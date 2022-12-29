@@ -1,5 +1,5 @@
 # pdfChangePageDimensions
-A `Node.js` command-line tool for Windows to change a PDF document's page dimensions while preserving the top, left, and right margins proportions (i.e., only the bottom margin proportion may change after the resizing) then strip the output PDF document's metadata afterwards.
+A `Node.js` command-line tool for Windows to change a PDF document's page dimensions (measured in pts) while preserving the top, left, and right margins proportions (i.e., only the bottom margin proportion may change after the resizing) then strip the output PDF document's metadata afterwards.
 
 ## How to Use
 `node pdfChangePageDimensions.js <inputPDF> <desiredWidth>x<desiredHeight>`
@@ -44,3 +44,7 @@ Afterwards, the tool calculates `step3Width` and `step3Height` in terms of the i
 Finally, the tool calculates the coordinates which will be used in a `Ghostscript` command to create `step4.pdf` that essentially crops `step3.pdf` in such a way that will preserve top, left, and right margins proportions of the original `input.pdf`/`step1.pdf` document and such that the bottom margin proportion will be the only one that can vary if the desired aspect ratio `desiredWidth/desiredHeight` is not equal to the original `step1Width/step1Height`. *Optionally*, the tool will copy `step4.pdf` as `output.pdf`,  remove the document information dictionary metadata by using `PDFtk Server`, and (reversibly) 'remove' the XMP metadata by using `ExifTool`. You can read more about PDF metadata removal [here](https://gist.github.com/hubgit/6078384). The tool then ends by *optionally* logging the dimensions of `step1.pdf`, `step2.pdf`, `step3.pdf`, and `step4.pdf` and also by logging `pdfinfo output.pdf`.
 
 ## Example
+
+
+## Some Side Notes
+I am aware that I can shorten the tool's source code by essentially merging steps 3 and 4 into a single step but I personally still prefer the tool having 4 steps because it is easier for me to visualize each step and makes certain calculations more readable. For example, I declared `step3Height` and assigned `(desiredWidth / step2Width) * step2Height` to it to make the calculation of `yCoordinate2` more legible with `yCoordinate2 = (step3Height - (step3Height - ((step4Width / step1Width) * step1Height)) / 2)` as opposed to the expanded `yCoordinate2 = ((desiredWidth / step2Width) * step2Height - ((desiredWidth / step2Width) * step2Height - ((step4Width / step1Width) * step1Height)) / 2)`. Also, this is my first ever amateur project and GitHub repository so any feedback and constructive criticism would be welcome. I am not personally fluent in `JavaScript` and `Node.js` nor in any of the command-line tools used here as I am still self-learning from time to time at my own pace and I am very grateful to all the online resources and Q&A sites like the Stack Exchange Network that has helped my learning process.
