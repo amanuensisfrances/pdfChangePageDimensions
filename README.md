@@ -18,15 +18,15 @@ A `Node.js` Windows command-line tool used for changing a PDF document's page di
 2. Open your `Ghostscript`'s `bin` folder then copy `gswin64c.exe` as `gs.exe`.
 3. Install your preferred Virtual PDF Printer and then [set it as your default printer in Windows](https://support.microsoft.com/en-us/windows/set-a-default-printer-in-windows-e10cf8b8-e596-b102-bf84-c41022b5036f/).
 4. Change your Virtual PDF Printer settings such that:
-- [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/General.png/)
-- [No dialog/popup appears during document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/Dialogs.png/)
-- [PDF Quality is set to default.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/Document.png/)
-- [Neither the output directory/destination folder nor the output file will be opened after document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Bullzip%20PDF%20Printer%20Settings/Actions.png/)
-5. Open any `*.pdf` document in `Acrobat Reader` or `Acrobat Pro`, go to the 'Print' window (`CTRL+P`) and select your preferred Virtual PDF Printer then click 'Fit' under the 'Page sizing & Handling' section and make sure 'Choose paper source by PDF page size' is unticked. Also make sure the output document will be vertically centered.
+- [The default output directory/destination folder is `C:Users\<username>\Downloads` and the default output file name will be the same as the input file name.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/General.png/)
+- [No dialog/popup appears during document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Dialogs.png/)
+- [PDF Quality is set to default.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Document.png/)
+- [Neither the output directory/destination folder nor the output file will be opened after document creation.](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Actions.png/)
+5. [Open any `*.pdf` document in `Acrobat Reader` or `Acrobat Pro`, go to the 'Print' window (`CTRL+P`) and select your preferred Virtual PDF Printer then click 'Fit' under the 'Page sizing & Handling' section and make sure 'Choose paper source by PDF page size' is unticked. Also make sure the output document will be vertically centered](https://github.com/amanuensisfrances/pdfChangePageDimensions/blob/main/Images/Adobe%20Acrobat%20Print%20Window.png/).
 6. Customize the rest of your 'Properties', 'Advanced', 'Page Setup...' settings as per your needs (I believe this `pdfChangePageDimensions.js` tool only works for PDF documents with a portrait orientation by default, but it shouldn't be too difficult to modify the source code to work for PDF documents with a landscape orientation).
 7. Try virtually printing a `*.pdf` file to save your preferred settings and then check the 'Fonts' section of the result's document properties (`CTRL+D`) to make sure the fonts are all embedded properly. 
-8. If you're using `Adobe Acrobat Pro`, download and extract `withAcrobatPro` from the [latest `pdfChangePageDimensions` release](https://github.com/amanuensisfrances/pdfChangePageDimensions/releases) and if you're using `Adobe Acrobat Reader`, download and extract `withAcrobatReader` instead.
-9. Run `node pdfChangePageDimensions.js <inputPDF> <desiredWidth>x<desiredHeight>` in the command-line to check if everything works correctly.
+8. If you're using `Adobe Acrobat Pro`, download and extract `withAcrobatPro` from the [latest `pdfChangePageDimensions` release](https://github.com/amanuensisfrances/pdfChangePageDimensions/releases/) and if you're using `Adobe Acrobat Reader`, download and extract `withAcrobatReader` instead.
+9. Run `node pdfChangePageDimensions.js <inputPDF> <desiredWidth>x<desiredHeight>` in the command-line to check if everything works correctly. If it returns an error, try adjusting `waitingTimeForPrinter` in the source code of `pdfChangePageDimensions.js` and try again.
 
 ## How It Works
 
@@ -44,7 +44,9 @@ Afterwards, the tool calculates `step3Width` and `step3Height` in terms of the i
 Finally, the tool calculates the coordinates which will be used in a `Ghostscript` command to create `step4.pdf` that essentially crops `step3.pdf` in such a way that will preserve top, left, and right margins proportions of the original `input.pdf`/`step1.pdf` document and such that the bottom margin proportion will be the only one that can vary if the desired aspect ratio `desiredWidth/desiredHeight` is not equal to the original `step1Width/step1Height`. *Optionally*, the tool will copy `step4.pdf` as `output.pdf`,  remove the document information dictionary metadata by using `PDFtk Server`, and (reversibly) 'remove' the XMP metadata by using `ExifTool`. You can read more about PDF metadata removal [here](https://gist.github.com/hubgit/6078384). The tool then ends by *optionally* logging the dimensions of `step1.pdf`, `step2.pdf`, `step3.pdf`, and `step4.pdf` and also by logging `pdfinfo output.pdf`.
 
 ## Example
+### CASE 1 (`step2Width / step2Height < step4Width / step4Height`)
 
+### CASE 2 (`step2Width / step2Height > step4Width / step4Height`)
 
 ## Some Side Notes
 I am aware that I can shorten the tool's source code by essentially merging steps 3 and 4 into a single step but I personally still prefer the tool having 4 steps because it is easier for me to visualize each step and makes certain calculations more readable. For example, I declared `step3Height` and assigned `(desiredWidth / step2Width) * step2Height` to it to make the calculation of `yCoordinate2` (in the case where `step2Width / step2Height < step4Width / step4Height`) more legible with `yCoordinate2 = (step3Height - (step3Height - ((step4Width / step1Width) * step1Height)) / 2)` as opposed to the expanded `yCoordinate2 = ((desiredWidth / step2Width) * step2Height - ((desiredWidth / step2Width) * step2Height - ((step4Width / step1Width) * step1Height)) / 2)`.
