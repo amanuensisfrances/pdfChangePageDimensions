@@ -51,7 +51,7 @@ Afterwards, the tool calculates `step3Width` and `step3Height` in terms of the i
 ### STEP 4
 Finally, the tool calculates the coordinates which will be used in a `Ghostscript` command to create `step4.pdf` that essentially crops `step3.pdf` in such a way that will preserve top, left, and right margins proportions of the original `input.pdf`/`step1.pdf` document and such that the bottom margin proportion will be the only one that can vary if the desired aspect ratio `desiredWidth/desiredHeight` is not equal to the original `step1Width/step1Height`. *Optionally*, the tool will copy `step4.pdf` as `output.pdf`,  remove the document information dictionary metadata by using `PDFtk Server`, and (reversibly) 'remove' the XMP metadata by using `ExifTool`. You can read more about PDF metadata removal [here](https://gist.github.com/hubgit/6078384). The tool then ends by *optionally* logging the dimensions of `step1.pdf`, `step2.pdf`, `step3.pdf`, and `step4.pdf` and also by logging `pdfinfo output.pdf`.
 
-## Example
+## Examples
 ### CASE 1 (`step2Width / step2Height < step4Width / step4Height`)
 My Virtual PDF Printer's default paper size is `A4` so `step2Width ≈ 595 pt` and `step2Height ≈ 842 pt`. Let's somewhat arbitrarily pick `desiredWidth = step4Width = 1600 pt` and `desiredHeight = step4Height = 2000 pt`. This is considered **Case 1** because `step2Width / step2Height = √2/2 ≈ 0.707 < 0.8 = step4Width / stepHeight`.
 
