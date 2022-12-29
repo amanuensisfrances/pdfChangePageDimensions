@@ -1,5 +1,5 @@
 # pdfChangePageDimensions
-A `Node.js` command-line tool for Windows to change a PDF document's page dimensions (measured in pts) while preserving the top, left, and right margins proportions (i.e., only the bottom margin proportion may change after the resizing) then strip the output PDF document's metadata afterwards.
+A `Node.js` Windows command-line tool used for changing a PDF document's page dimensions (measured in pts) while preserving the top, left, and right margins proportions (i.e., only the bottom margin proportion may change after the resizing) and removing the output PDF document's metadata afterwards.
 
 ## How to Use
 `node pdfChangePageDimensions.js <inputPDF> <desiredWidth>x<desiredHeight>`
