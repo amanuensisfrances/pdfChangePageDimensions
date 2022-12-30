@@ -32,7 +32,7 @@ A `Node.js` Windows command-line tool used for changing a PDF document's page di
 
 7. Try virtually printing a `*.pdf` file to save your preferred settings and then check the 'Fonts' section of the result's document properties (`CTRL+D`) to make sure the fonts are all embedded properly. 
 
-8. If you're using `Adobe Acrobat Pro`, download and extract `withAcrobatPro.zip` from the [latest release](https://github.com/amanuensisfrances/pdfChangePageDimensions/releases) and if you're using `Adobe Acrobat Reader`, download and extract `withAcrobatReader.zip` instead.
+8. If you're using `Acrobat Pro`, download and extract `withAcrobatPro.zip` from the [latest release](https://github.com/amanuensisfrances/pdfChangePageDimensions/releases) and if you're using `Acrobat Reader`, download and extract `withAcrobatReader.zip` instead.
 
 9. Run `node pdfChangePageDimensions.js <inputPDF> <desiredWidth>x<desiredHeight>` in the command-line to check if everything works correctly. If it returns an error, try adjusting `waitingTimeForPrinter` in the source code of `pdfChangePageDimensions.js` and try again.
 
